@@ -1,1 +1,7 @@
 include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    constant_identifier_names: ignore
+    must_be_immutable: ignore
+    non_constant_identifier_names: ignore
+    unnecessary_getters_setters: ignore
