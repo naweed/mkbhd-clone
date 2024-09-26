@@ -45,50 +45,55 @@ class StartPage extends StackedView<StartPageViewModel> {
     }
 
     //Show UI
-    return MasonryGridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      itemBuilder: (context, index) {
-        var image = pageViewModel.Wallpapers[index];
+    if (pageViewModel.DataLoaded) {
+      return MasonryGridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        itemBuilder: (context, index) {
+          var image = pageViewModel.Wallpapers[index];
 
-        return GestureDetector(
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ImageDetailsPage(imageUrl: image))),
-          child: AspectRatio(
-            aspectRatio: 1 / 1.76,
-            child: Container(
-              padding: 4.withAllPadding(),
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.LightIndicatorColor.withOpacity(0.5), width: 0.75),
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.PageBackgroundColor,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: image,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    color: Colors.grey[900],
-                    child: const Center(
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          color: AppColors.LightIndicatorColor,
-                          strokeWidth: 3,
+          return GestureDetector(
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ImageDetailsPage(imageUrl: image))),
+            child: AspectRatio(
+              aspectRatio: 1 / 1.76,
+              child: Container(
+                padding: 4.withAllPadding(),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.LightIndicatorColor.withOpacity(0.5), width: 0.75),
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.PageBackgroundColor,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[900],
+                      child: const Center(
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: AppColors.LightIndicatorColor,
+                            strokeWidth: 3,
+                          ),
                         ),
                       ),
                     ),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
-          ),
-        ).withLTRBPadding(0, index == 1 ? 32 : 0, 0, 0);
-      },
-      itemCount: pageViewModel.Wallpapers.length,
-    ).withLTRBPadding(16, 0, 16, 0);
+          ).withLTRBPadding(0, index == 1 ? 32 : 0, 0, 0);
+        },
+        itemCount: pageViewModel.Wallpapers.length,
+      ).withLTRBPadding(16, 0, 16, 0);
+    }
+
+    //Show Empty Page
+    return Container();
   }
 }
