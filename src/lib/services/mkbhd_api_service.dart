@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:mkbhd_clone/shared/app_constants.dart';
 import 'package:http/http.dart' as http;
 
 class MKBHDApiService {
-  //Get Categories
+  //Get Wallpapers
   Future<List<String>> getWallpapers() async {
     try {
       //Make API call
@@ -16,7 +17,10 @@ class MKBHDApiService {
       } else {
         var jsonData = json.decode(response.body);
         var data = jsonData['data'] as Map<String, dynamic>;
-        return data.values.where((subproperty) => subproperty is Map && subproperty['dhd'] != null).map((subproperty) => subproperty['dhd'] as String).toList();
+        var list =
+            data.values.where((subproperty) => subproperty is Map && subproperty['dhd'] != null).map((subproperty) => subproperty['dhd'] as String).toList();
+        list.shuffle(Random(654321));
+        return list;
       }
     } catch (ex) {
       throw Exception(ex);

@@ -7,6 +7,4 @@ class AppConstants {
 
   static const int MicroDuration = 100;
   static const int SmallDuration = 300;
-  static const int MediumDuration = 600;
-  static const int LongDuration = 1200;
 }

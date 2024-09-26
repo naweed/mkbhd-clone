@@ -37,19 +37,12 @@ class AppViewModel extends BaseViewModel {
     _errorMessage = errorMessage;
   }
 
-  String _errorImage = "";
-  String get ErrorImage => _errorImage;
-  set ErrorImage(String errorImage) {
-    _errorImage = errorImage;
-  }
-
   void setDataLodingIndicators(bool isStaring) {
     if (isStaring) {
       _isBusy = true;
       _dataLoaded = false;
       _isErrorState = false;
       _errorMessage = "";
-      _errorImage = "";
     } else {
       _loadingText = "";
       _isBusy = false;
