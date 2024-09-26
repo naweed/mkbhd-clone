@@ -63,20 +63,23 @@ class ImageDetailsPage extends StackedView<ImageDetailsPageViewModel> {
           ).withLTRBPadding(32, 16, 32, 16),
         ),
         Positioned(
-          bottom: 20,
+          bottom: 24,
           left: 0,
           right: 0,
           child: Center(
             child: ElevatedButton.icon(
-              icon: Icon(Icons.file_download),
-              label: Text('Download'),
+              icon: const Icon(Icons.file_download),
+              label: const Text(
+                "Download Wallpaper",
+                style: AppStyles.RegularLight16TextStyle,
+              ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: (20, 10).withSymetricPadding(),
               ),
-              onPressed: () => {}, //_downloadImage(context),
+              onPressed: () => pageViewModel.downloadFile(context),
             ),
           ),
         ),
