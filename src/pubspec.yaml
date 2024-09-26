@@ -30,18 +30,6 @@ flutter:
     - assets/images/
 
   fonts:
-    - family: ExtraBoldFont
-      fonts:
-        - asset: assets/fonts/Moderustic-ExtraBold.ttf
-
-    - family: SemiFont
-      fonts:
-        - asset: assets/fonts/Moderustic-SemiBold.ttf
-
-    - family: BoldFont
-      fonts:
-        - asset: assets/fonts/Moderustic-Bold.ttf
-
     - family: LightFont
       fonts:
         - asset: assets/fonts/Moderustic-Light.ttf

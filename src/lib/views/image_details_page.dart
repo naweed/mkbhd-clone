@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:mkbhd_clone/shared/app_styles.dart';
+import 'package:mkbhd_clone/viewmodels/image_details_page_view_model.dart';
+import 'package:stacked/stacked.dart';
 
-class ImageDetailsPage extends StatelessWidget {
+class ImageDetailsPage extends StackedView<ImageDetailsPageViewModel> {
   final String imageUrl;
+  late ImageDetailsPageViewModel pageViewModel;
 
-  const ImageDetailsPage({super.key, required this.imageUrl});
+  ImageDetailsPage({super.key, required this.imageUrl});
 
   @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  ImageDetailsPageViewModel viewModelBuilder(BuildContext context) {
+    pageViewModel = ImageDetailsPageViewModel(imageUrl);
+    return pageViewModel;
+  }
+
+  @override
+  Widget builder(BuildContext context, ImageDetailsPageViewModel viewModel, Widget? child) => Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppStyles.getPageAppBar(viewModel.Title),
+        body: _buildUI(context),
+      );
+
+  Widget _buildUI(BuildContext context) {
+    return Container();
   }
 }

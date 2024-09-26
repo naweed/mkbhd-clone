@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -31,23 +29,7 @@ class StartPage extends StackedView<StartPageViewModel> {
   @override
   Widget builder(BuildContext context, StartPageViewModel viewModel, Widget? child) => Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: AppColors.PageBackgroundColor.withAlpha(200),
-          centerTitle: true,
-          title: Text(
-            viewModel.Title,
-            style: AppStyles.MediumLight22TextStyle,
-          ),
-          flexibleSpace: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: Container(
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-        ),
+        appBar: AppStyles.getPageAppBar(viewModel.Title),
         body: _buildUI(context),
       );
 
