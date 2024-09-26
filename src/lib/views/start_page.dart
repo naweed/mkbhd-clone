@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -5,7 +7,9 @@ import 'package:mkbhd_clone/controls/extensions/padding_extensions.dart';
 import 'package:mkbhd_clone/controls/shared/error_indicator.dart';
 import 'package:mkbhd_clone/controls/shared/loading_indicator.dart';
 import 'package:mkbhd_clone/shared/app_colors.dart';
+import 'package:mkbhd_clone/shared/app_styles.dart';
 import 'package:mkbhd_clone/viewmodels/start_page_view_model.dart';
+import 'package:mkbhd_clone/views/image_details_page.dart';
 import 'package:stacked/stacked.dart';
 
 class StartPage extends StackedView<StartPageViewModel> {
@@ -26,6 +30,24 @@ class StartPage extends StackedView<StartPageViewModel> {
 
   @override
   Widget builder(BuildContext context, StartPageViewModel viewModel, Widget? child) => Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: AppColors.PageBackgroundColor.withAlpha(200),
+          centerTitle: true,
+          title: Text(
+            viewModel.Title,
+            style: AppStyles.MediumLight22TextStyle,
+          ),
+          flexibleSpace: ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+        ),
         body: _buildUI(context),
       );
 
@@ -46,8 +68,10 @@ class StartPage extends StackedView<StartPageViewModel> {
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
       itemBuilder: (context, index) {
+        var image = pageViewModel.Wallpapers[index];
+
         return GestureDetector(
-          onTap: () => {}, //_showImageDetails(context, imageUrls[index]),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ImageDetailsPage(imageUrl: image))),
           child: AspectRatio(
             aspectRatio: 1 / 1.76,
             child: Container(
@@ -60,7 +84,7 @@ class StartPage extends StackedView<StartPageViewModel> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
-                  imageUrl: pageViewModel.Wallpapers[index],
+                  imageUrl: image,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Container(
                     color: Colors.grey[900],
@@ -83,6 +107,6 @@ class StartPage extends StackedView<StartPageViewModel> {
         ).withLTRBPadding(0, index == 1 ? 32 : 0, 0, 0);
       },
       itemCount: pageViewModel.Wallpapers.length,
-    ).withAllPadding(16);
+    ).withLTRBPadding(16, 0, 16, 0);
   }
 }

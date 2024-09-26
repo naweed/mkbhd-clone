@@ -7,8 +7,8 @@ class AppStyles {
 //   //App Header Style
 //   static const TextStyle AppHeaderTextStyle = TextStyle(fontFamily: "AppHeaderFont", color: AppColors.LightTextColor, fontSize: 32, height: 0);
 
-//   //Medium Light Text Styles
-//   static const TextStyle MediumLight18TextStyle = TextStyle(fontFamily: "MediumFont", color: AppColors.LightTextColor, fontSize: 18);
+  //Medium Light Text Styles
+  static const TextStyle MediumLight22TextStyle = TextStyle(fontFamily: "MediumFont", color: AppColors.LightTextColor, fontSize: 22);
 
 //   //Regular Light Text Styles
 //   static const TextStyle RegularLight12TextStyle = TextStyle(fontFamily: "RegularFont", color: AppColors.LightTextColor, fontSize: 12);
