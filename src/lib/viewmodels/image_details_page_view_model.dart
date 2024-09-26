@@ -18,7 +18,7 @@ class ImageDetailsPageViewModel extends AppViewModel {
   }
 
   Future<void> downloadFile(BuildContext context) async {
-    var status = await Permission.photos.request();
+    var status = await Permission.storage.request();
 
     if (status.isGranted) {
       try {
